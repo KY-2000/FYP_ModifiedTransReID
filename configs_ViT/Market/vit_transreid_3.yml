@@ -1,0 +1,37 @@
+DATALOADER: {NUM_INSTANCE: 4, NUM_WORKERS: 8, SAMPLER: softmax_triplet}
+DATASETS: {NAMES: ('market1501'), ROOT_DIR: ('../../data')}
+INPUT:
+  PADDING: 10
+  PIXEL_MEAN: [0.5, 0.5, 0.5]
+  PIXEL_STD: [0.5, 0.5, 0.5]
+  PROB: 0.5
+  RE_PROB: 0.5
+  SIZE_TEST: [256, 128]
+  SIZE_TRAIN: [256, 128]
+MODEL:
+  BDB_enable: False
+  DEVICE_ID: ('5')
+  FRM_enable: False
+  FRM_scale: 0.5
+  IF_LABELSMOOTH: 'off'
+  IF_WITH_CENTER: 'no'
+  JPM: true
+  METRIC_LOSS_TYPE: triplet
+  NAME: transformer
+  NO_MARGIN: true
+  PATCH_KEEP_RATE: 0.7
+  PFDE_enable: false
+  PRETRAIN_CHOICE: imagenet
+  PRETRAIN_PATH: /home/cjy/data0/TransReID/pretrained/ViT/vit_base_p16_224-80ecf9dd.pth
+  RE_ARRANGE: true
+  SIE_CAMERA: true
+  SIE_COE: 3.0
+  STRIDE_SIZE: [16, 16]
+  TRANSFORMER_TYPE: vit_base_patch16_224_TransReID
+  SC_enable: False
+OUTPUT_DIR: /home/cjy/data0/TransReID/logs_ViT/market1501/vit_transreid_pkr0.7
+SOLVER: {BASE_LR: 0.008, BIAS_LR_FACTOR: 2, CHECKPOINT_PERIOD: 120, EVAL_PERIOD: 120,
+  IMS_PER_BATCH: 64, LARGE_FC_LR: false, LOG_PERIOD: 50, MAX_EPOCHS: 120, OPTIMIZER_NAME: SGD,
+  WARMUP_METHOD: linear, WEIGHT_DECAY: 1e-4, WEIGHT_DECAY_BIAS: 1e-4}
+TEST: {EVAL: true, FEAT_NORM: 'yes', IMS_PER_BATCH: 256, NECK_FEAT: before, RE_RANKING: false,
+  WEIGHT: /home/cjy/data0/TransReID/logs_ViT/market1501/vit_transreid_pkr0.7/transformer_120.pth}
